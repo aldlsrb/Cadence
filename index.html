@@ -144,7 +144,7 @@ input[type=date].in{min-width:150px}
 @container (max-width:900px){.tiles.vert{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @container (max-width:560px){.tiles.vert{grid-template-columns:minmax(0,1fr)}}
 @supports not (container-type:inline-size){@media (max-width:1000px){.tiles.vert{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (max-width:640px){.tiles.vert{grid-template-columns:minmax(0,1fr)}}}
-.tile,.btn,.nb,.pill,.day,.opt,.oxa button,.chk .box{-webkit-user-select:none;user-select:none;touch-action:manipulation;-webkit-touch-callout:none}
+.tile,.btn,.nb,.pill,.day,.opt,.tile,.btn,.nb,.pill,.day,.opt,.chk .box,.swb,.swc{-webkit-user-select:none;user-select:none;touch-action:manipulation;-webkit-touch-callout:none}
 .tile input,.tile textarea{-webkit-user-select:text;user-select:text}
 .tiles::-webkit-scrollbar{display:none}
 .tile{--c:var(--blue);flex:0 0 min(340px,84vw);scroll-snap-align:start;background:var(--card);border-radius:24px;padding:22px;border:2px solid transparent;box-shadow:inset 0 0 0 1px var(--line);transition:transform .28s cubic-bezier(.2,.8,.2,1),box-shadow .28s,border-color .28s;position:relative;cursor:pointer}
@@ -160,16 +160,6 @@ html:not(.dark) .tile.sel{border-color:#fff;box-shadow:0 0 0 2px var(--c),0 0 20
 .tile .big .of{color:var(--sub);font-weight:600;font-size:17px}
 .tile .state{position:relative;display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--blue2);margin-bottom:10px}
 .tile .state svg{width:16px;height:16px}
-.oxa{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:10px}
-.oxa button{display:flex;align-items:center;justify-content:center;gap:8px;min-height:44px;border-radius:14px;border:1px solid var(--line);background:transparent;font-weight:600;font-variant-numeric:tabular-nums}
-.oxa button svg{width:18px;height:18px;stroke-width:2}
-.oxa .k-o svg{color:var(--blue2)}
-.oxa .k-x svg{color:#ff5a5f}
-.oxa .k-t svg{color:#8a8f98}
-.oxa small{font-size:12px;color:var(--sub);font-weight:500}
-@container (max-width:520px){.tiles.vert .oxa small{display:none}}
-@media (max-width:480px){.oxa small{display:none}}
-
 .panel{margin-top:26px;padding:24px;border-radius:24px;background:var(--bg2);box-shadow:inset 0 0 0 1px var(--line)}
 .panel.rest{display:grid;gap:14px;background:radial-gradient(90% 120% at 100% 0%,color-mix(in srgb,var(--blue) 18%,transparent),transparent 60%),var(--bg2)}
 .panel.rest .ttl{display:flex;align-items:center;gap:12px;font-size:28px;font-weight:700}
@@ -229,6 +219,10 @@ html:not(.dark) .tile.sel{border-color:#fff;box-shadow:0 0 0 2px var(--c),0 0 20
 .day{position:relative;min-height:clamp(54px,9vw,92px);border-radius:14px;border:0;background:var(--bg2);padding:8px;text-align:left;display:flex;flex-direction:column;justify-content:space-between;font-variant-numeric:tabular-nums}
 .day .dn{font-weight:600;font-size:15px}
 .day .tag{position:absolute;top:8px;right:8px;font-size:12px;color:var(--sub)}
+.day .tagi{top:6px;right:6px;line-height:0}
+.day .tagi svg{width:12px;height:12px}
+.day.ok .tag{color:#fff}
+@media (max-width:600px){.day .tag{top:4px;right:4px;font-size:11px}.day .tagi svg{width:10px;height:10px}}
 .day .dots{display:flex;gap:3px;flex-wrap:wrap}
 .day .dots i{width:7px;height:7px;border-radius:50%}
 .day .dots i.h{background:transparent}
@@ -372,6 +366,8 @@ header>.cbrand+.eyebrow{padding-right:90px;overflow:hidden;text-overflow:ellipsi
 .swc.on{box-shadow:0 0 0 3px var(--bg),0 0 0 5px var(--ink)}
 .swc:focus-visible{outline:none;box-shadow:0 0 0 3px var(--bg),0 0 0 5px var(--blue2)}
 .ver{text-align:center;color:var(--sub);font-size:13px;margin:40px 0 10px;font-variant-numeric:tabular-nums}
+.holrow .lab.grow{flex:1 1 160px}
+@media (max-width:480px){.holrow>.lab{flex:1 1 100%}.holrow>.lab input{width:100%}.holrow>.btn{flex:1 1 100%}}
 .offs{margin-top:8px}
 .offs summary{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:999px;border:1px solid var(--line);font-weight:600;font-size:15px;color:var(--sub);cursor:pointer;list-style:none}
 .offs summary::-webkit-details-marker{display:none}
@@ -446,8 +442,10 @@ header>.cbrand+.eyebrow{padding-right:90px;overflow:hidden;text-overflow:ellipsi
 @keyframes fade{from{opacity:0}}
 .sheet{width:min(560px,100%);max-height:86vh;max-height:86dvh;overflow:auto;background:var(--bg);border-radius:26px;padding:26px;box-shadow:0 30px 80px -20px rgba(0,0,0,.6),inset 0 0 0 1px var(--line);animation:vin .3s cubic-bezier(.2,.8,.2,1)}
 .sheet .mb{margin-bottom:22px}
-.mrow{--c:var(--blue);display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}
-.mrow .nm{flex:1 1 140px;display:flex;align-items:center;gap:10px;font-weight:600}
+.mrow{--c:var(--blue);display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:center;gap:10px 14px;padding:12px 0;border-bottom:1px solid var(--line)}
+.mrow .nm{display:flex;align-items:center;gap:10px;font-weight:600;min-width:0}
+.mrow .mta{grid-column:1/-1}
+@media (max-width:480px){.mrow{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.mrow .nm{grid-column:1/-1}.mrow .lab.inl{justify-content:space-between}.mrow .in.n{width:100%;max-width:110px}}
 .mrow .nm small{color:var(--sub);font-weight:500}
 .mrow .in.n{width:84px}
 .mrow .ox{display:flex;gap:6px;flex-basis:100%;justify-content:flex-end;align-items:center;font-size:13px;color:var(--sub)}
@@ -741,7 +739,7 @@ function sumLogSlow(p,sid,a,b,w){let n=0;for(const ds in p.log){if(ds>=a&&ds<=b)
 function sumLog(p,sid,a,b,w){if(a>b)return 0;const C=cacheFor(p),X=C&&C.S[sid];if(!X)return sumLogSlow(p,sid,a,b,w);const i=Math.max(0,ix(C,a)),j=Math.min(C.N-1,ix(C,b));if(i>j)return 0;const P=w?X.pw:X.pre;return P[j+1]-P[i]}
 const roundAt=(p,ds)=>p.rounds.findIndex(r=>r.s&&r.e&&ds>=r.s&&ds<=r.e);
 const inFinish=(p,ds)=>p.finish.on&&p.finish.s&&ds>=p.finish.s&&ds<=p.finish.e;
-function roundAmt(p,s,ri){const r=p.rounds[ri];const base=Math.ceil((+s.total||0)*(+r.pct||0)/100);if(ri>0&&r.type==='wrong'){const pr=p.rounds[ri-1];const w=sumLog(p,s.id,pr.s,pr.e,'w');if(w>0)return w}return base}
+function roundAmt(p,s,ri){return Math.ceil(+s.total||0)}
 /* 과목 배치: all(매일 전 과목) · dow(과목별 요일) · rot(순환) · manual(직접 작성) + 날짜별 직접 지정(ovr) */
 const ovr=(p,ds,sid)=>{const o=p.ovr&&p.ovr[ds];return o&&o[sid]!=null&&o[sid]!==''?(+o[sid]||0):null};
 const hasOvr=(p,ds)=>!!(p.ovr&&p.ovr[ds]&&Object.keys(p.ovr[ds]).length);
@@ -885,7 +883,6 @@ function tileHTML(p,s,t){
  }else{const cr=carryOf(p,s,t);meta='하루 목표'+(cr>0?` · 이월 ${fmt(cr)}`:'')}
  if(g===0&&(p.sched||'all')!=='all'&&t>=p.start){const nd=nextOn(p,s,t);meta+=nd?` · 다음 ${fmtMD(nd)}`:''}
  if(ovr(p,t,s.id)!=null)meta+=' · 직접 정한 목표';
- const mk=(k,lab)=>`<button class="k-${k}" data-act="mark" data-id="${s.id}" data-k="${k}" aria-label="${lab} 하나 기록">${I[k]}${e[k]||0}<small>${lab}</small></button>`;
  return `<article class="tile ${V.sel===s.id?'sel':''}" data-act="sel" data-id="${s.id}" style="--c:${c}">
   <header><span class="dot"></span><b class="grow">${esc(s.name)}</b><button class="btn sm memob" data-act="memo" data-id="${s.id}" aria-label="${esc(s.name)} 메모">${I.pen}메모</button></header>
   <p class="meta">${meta}</p>
@@ -895,7 +892,6 @@ function tileHTML(p,s,t){
   ${state}
   <div class="adj"><button class="btn icon stepb" data-act="add" data-id="${s.id}" data-n="-1" aria-label="1 빼기">${I.minus}</button><div class="bar" style="--c:${c}"><i class="${pct?'':'z'}" style="width:${pct}%"></i></div><button class="btn icon stepb" data-act="add" data-id="${s.id}" data-n="1" aria-label="1 더하기">${I.plus}</button></div>
   ${g>0?(d<g?`<button class="btn fill" data-act="fill" data-id="${s.id}">${I.check}완료 · ${fmt(g)} ${esc(p.unit)}</button>`:`<button class="btn fill done" disabled>${I.check}오늘 몫 완료</button>`):''}
-  ${p.oxa?`<div class="oxa">${mk('o','맞음')}${mk('t','헷갈림')}${mk('x','틀림')}</div>`:''}
  </article>`;
 }
 function todayView(p){
@@ -954,7 +950,7 @@ function rangeOf(p,s,t){
  if(s.from===''||s.from==null)return null;const f=+s.from;if(!(f>=0))return null;
  const g=goal(p,s,t);if(g<=0)return null;
  let before,cap=Infinity;
- if(s.mode==='total'){const ri=roundAt(p,t);if(ri<0)return null;const r=p.rounds[ri];if(ri>0&&r.type==='wrong')return null;before=sumLog(p,s.id,r.s,addD(t,-1));cap=f+roundAmt(p,s,ri)-1}
+ if(s.mode==='total'){const ri=roundAt(p,t);if(ri<0)return null;const r=p.rounds[ri];before=sumLog(p,s.id,r.s,addD(t,-1));cap=f+roundAmt(p,s,ri)-1}
  else before=sumLog(p,s.id,'0000-00-00',addD(t,-1));
  const a=f+before;if(a>cap)return null;const b=Math.min(cap,a+g-1),nx=a+doneOn(p,t,s.id);
  return{a,b,nx:nx<=b?nx:null};
@@ -985,7 +981,7 @@ function progView(p){
   const cur=roundAt(p,t);
   p.rounds.forEach((r,ri)=>{
    const state=t<r.s?'예정':t>r.e?'종료':'진행 중';
-   h+=`<section class="sec"><header><h2>${ri+1}회독</h2><span class="sub">${fmtMD(r.s)}–${fmtMD(r.e)} · 공부일 ${studyDays(p,r.s,r.e)}일 · ${state}${r.type==='wrong'?' · 틀린 것만':''}</span></header>`;
+   h+=`<section class="sec"><header><h2>${ri+1}회독</h2><span class="sub">${fmtMD(r.s)}–${fmtMD(r.e)} · 공부일 ${studyDays(p,r.s,r.e)}일 · ${state}</span></header>`;
    tot.forEach(s=>{
     const c=scol(s),amt=roundAmt(p,s,ri),dn=sumLog(p,s.id,r.s,r.e),pc=amt?Math.min(100,Math.round(dn/amt*100)):0;
     let fc='';if(ri===cur){const f=forecast(p,s,ri);fc=`<p class="fc">현재 속도 기준 <b class="${f.c}">${f.t}</b>${f.avg!=null?` · 지금 하루 평균 ${fmt(Math.round(f.avg))}${f.c==='late'?`, 맞추려면 <b class="late">하루 ${fmt(f.per)}</b>`:''}`:''} · 오늘 목표 ${fmt(goal(p,s,t))}</p>`}
@@ -1044,7 +1040,6 @@ const HELP=[
   ['범위 표시','과목 설정에 시작 번호를 넣으면 "221~264번 · 다음 226번"처럼 오늘 할 범위가 보입니다.'],
   ['메모와 고정','카드의 메모 버튼으로 그날 메모를 남깁니다. 고정한 메모는 날짜가 지나도 카드에 계속 보입니다. 과목마다 하나만 고정됩니다.'],
   ['To-Do List','그날 할 일을 적고 체크합니다. 못 끝낸 일은 다음 날로 넘어갑니다(설정 → 표시에서 끌 수 있습니다). 핀 버튼을 누르면 매일 뜨는 할 일로 고정되고, 체크는 날마다 새로 합니다.'],
-  ['맞음·헷갈림·틀림','설정 → 표시에서 켜면 카드에 ○△✕ 버튼이 생깁니다. 헷갈림·틀림 개수는 "틀린 것만" 회독 분량이 됩니다.'],
   ['기록 카드','오늘 한 양을 이미지 한 장으로 만들어 저장하거나 공유합니다.']]],
  ['자동 계산',[
   ['오늘 목표','이번 회독의 남은 분량을 남은 공부일로 나눈 값(올림)입니다. 오늘 기록은 오늘 목표를 바꾸지 않고, 내일부터 다시 나뉩니다.'],
@@ -1052,7 +1047,6 @@ const HELP=[
   ['휴식','휴식 요일과 추가 휴일에는 목표가 0이 되고, 그만큼 다른 날에 나뉩니다. 오늘 화면 맨 아래 <b>오늘 쉬기</b>로 바로 쉴 수 있고, 캘린더에서 날짜를 눌러 휴일로 지정할 수도 있습니다.']]],
  ['회독',[
   ['기간 제안','앞 회독일수록 길게 나눕니다(3회독이면 5:3:2). 날짜는 직접 고칠 수 있고, "기간 다시 제안"으로 되돌릴 수 있습니다.'],
-  ['틀린 것만','2회독부터 고를 수 있습니다. 앞 회독에서 헷갈림·틀림으로 기록한 개수를 쓰고, 기록이 없으면 % 비율로 계산합니다.'],
   ['마무리 기간','마감 전 며칠을 분량 목표 없이 체크리스트로 보내는 기간입니다.']]],
  ['과목 배치',[
   ['매일 전 과목','공부일마다 모든 과목을 조금씩 합니다. 기본값입니다.'],
@@ -1134,7 +1128,7 @@ function calView(p){
  for(let dd=1;dd<=n;dd++){
   const ds=`${y}-${pad(mo)}-${pad(dd)}`,st=dayStat(p,ds);
   const dots=p.subjects.map(s=>{const c=scol(s);if(doneOn(p,ds,s.id)>0)return `<i style="background:${c}"></i>`;if(ds>=t&&st!=='out'&&goal(p,s,ds)>0)return `<i class="h" style="box-shadow:inset 0 0 0 1.5px ${c}"></i>`;return ''}).join('');
-  const tag=hasOvr(p,ds)?'<span class="tag">직접</span>':st==='rest'?'<span class="tag">휴</span>':'';
+  const tag=hasOvr(p,ds)?`<span class="tag tagi" title="직접 정한 목표">${I.pen}</span>`:st==='rest'?'<span class="tag">휴</span>':'';
   const TL=p.todos[ds]||[],tdm=TL.length?`<span class="tdm ${TL.every(x=>x.done)?'ok':''}">${TL.every(x=>x.done)?I.check:I.list}</span>`:'';
   cells+=`<button class="day ${st} ${ds===t?'today':''}" data-act="day" data-ds="${ds}" aria-label="${fmtLong(ds)}"><span class="dn">${dd}</span>${tag}<span class="dots">${dots}${tdm}</span></button>`;
  }
@@ -1148,7 +1142,7 @@ function dayModal(ds){
  const p=plan();
  const inRange=p.holidays.find(h=>h.e&&h.e!==h.s&&ds>=h.s&&ds<=h.e),single=p.holidays.some(h=>(!h.e||h.e===h.s)&&h.s===ds),rd=p.restDows.includes(dowOf(ds));
  const tmp=p.ovr[ds];delete p.ovr[ds];memo.clear();const auto={};p.subjects.forEach(s=>auto[s.id]=goal(p,s,ds));if(tmp)p.ovr[ds]=tmp;memo.clear();
- let body=`<h4 class="msec">할 일</h4><div id="mtodo">${todoBlock(p,ds,'mtdIn')}</div><h4 class="msec" style="margin-top:24px">과목별 기록</h4><p class="help" style="margin:-4px 0 6px">목표 칸을 비워 두면 자동 계산(${p.sched==='manual'?'직접 작성 모드에서는 0':'회색 숫자'})을 씁니다.</p>`+p.subjects.map(s=>{const e=ent(p,ds,s.id)||{},o=ovr(p,ds,s.id);return `<div class="mrow" style="--c:${scol(s)}"><div class="nm"><span class="dot"></span>${esc(s.name)}</div><label class="lab inl">목표<input class="in n" type="number" inputmode="numeric" min="0" data-mo="${s.id}" placeholder="${auto[s.id]}" value="${o!=null?o:''}" aria-label="${esc(s.name)} 목표"></label><label class="lab inl">완료<input class="in n" type="number" inputmode="numeric" min="0" data-md="${s.id}" data-k="d" value="${e.d||0}" aria-label="${esc(s.name)} 완료"></label>${p.oxa?`<div class="ox">맞음<input class="in n" type="number" inputmode="numeric" min="0" data-md="${s.id}" data-k="o" value="${e.o||0}">헷갈림<input class="in n" type="number" inputmode="numeric" min="0" data-md="${s.id}" data-k="t" value="${e.t||0}">틀림<input class="in n" type="number" inputmode="numeric" min="0" data-md="${s.id}" data-k="x" value="${e.x||0}"></div>`:''}<textarea class="in mta" data-mm="${s.id}" rows="1" placeholder="${esc(s.name)} 메모" aria-label="${esc(s.name)} 메모">${esc(memoOf(p,ds,s.id))}</textarea></div>`}).join('');
+ let body=`<h4 class="msec">할 일</h4><div id="mtodo">${todoBlock(p,ds,'mtdIn')}</div><h4 class="msec" style="margin-top:24px">과목별 기록</h4><p class="help" style="margin:-4px 0 6px">목표 칸을 비워 두면 자동 계산(${p.sched==='manual'?'직접 작성 모드에서는 0':'회색 숫자'})을 씁니다.</p>`+p.subjects.map(s=>{const e=ent(p,ds,s.id)||{},o=ovr(p,ds,s.id);return `<div class="mrow" style="--c:${scol(s)}"><div class="nm"><span class="dot"></span>${esc(s.name)}</div><label class="lab inl">목표<input class="in n" type="number" inputmode="numeric" min="0" data-mo="${s.id}" placeholder="${auto[s.id]}" value="${o!=null?o:''}" aria-label="${esc(s.name)} 목표"></label><label class="lab inl">완료<input class="in n" type="number" inputmode="numeric" min="0" data-md="${s.id}" data-k="d" value="${e.d||0}" aria-label="${esc(s.name)} 완료"></label><textarea class="in mta" data-mm="${s.id}" rows="1" placeholder="${esc(s.name)} 메모" aria-label="${esc(s.name)} 메모">${esc(memoOf(p,ds,s.id))}</textarea></div>`}).join('');
  const extra=rd?'<span class="chip">휴식 요일</span>':inRange?`<span class="chip">추가 휴일 ${fmtMD(inRange.s)}–${fmtMD(inRange.e)}</span>`:`<label class="tog sm"><input type="checkbox" id="mhol" ${single?'checked':''}>휴일</label>`;
  modal(fmtLong(ds),body,[{label:'취소'},{label:'저장',pri:true,fn:()=>{
   $$('#modal [data-md]').forEach(inp=>{const sid=inp.dataset.md,k=inp.dataset.k,v=Math.max(0,parseInt(inp.value)||0);p.log[ds]=p.log[ds]||{};const e=p.log[ds][sid]=Object.assign({d:0,o:0,t:0,x:0},p.log[ds][sid]);e[k]=v});
@@ -1257,9 +1251,9 @@ function subjEditor(p,showMode){
 function roundEditor(p){
  return `<div class="row"><label class="lab inl">회독 수<select class="in" data-ch="rcount">${[1,2,3,4,5].map(n=>`<option ${p.rounds.length===n?'selected':''}>${n}</option>`).join('')}</select></label><button class="btn sm" data-act="resuggest">기간 다시 제안</button></div>
  ${p.rounds.map((r,i)=>`<div class="rrow"><b>${i+1}회독</b><input class="in" type="date" value="${esc(r.s)}" data-ch="rs" data-i="${i}" aria-label="${i+1}회독 시작"><span class="sub">–</span><input class="in" type="date" value="${esc(r.e)}" data-ch="re" data-i="${i}" aria-label="${i+1}회독 종료"><span class="sub small">공부일 ${studyDays(p,r.s,r.e)}일</span>
-  ${i>0?`<select class="in" data-ch="rtype" data-i="${i}"><option value="all" ${r.type!=='wrong'?'selected':''}>전체</option><option value="wrong" ${r.type==='wrong'?'selected':''}>틀린 것만</option></select>`:''}
-  <label class="lab inl">분량<input class="in n" style="width:76px" type="number" inputmode="numeric" min="1" max="100" value="${esc(r.pct)}" data-ch="rpct" data-i="${i}">%</label></div>`).join('')}
- <p class="help">앞 회독일수록 길게 제안합니다(3회독이면 5:3:2). '틀린 것만' 회독은 앞 회독에서 헷갈림·틀림으로 기록한 개수를 쓰고, 기록이 없으면 % 비율로 계산합니다.</p>
+
+</div>`).join('')}
+ <p class="help">앞 회독일수록 길게 제안합니다(3회독이면 5:3:2).  매 회독마다 전체 분량을 다시 봅니다.</p>
  <div style="margin-top:18px"><label class="tog"><input type="checkbox" data-ch="fon" ${p.finish.on?'checked':''}>마무리 기간 추가</label>
  ${p.finish.on?`<div class="row" style="margin-top:10px"><label class="lab inl">마지막<input class="in n" style="width:76px" type="number" inputmode="numeric" min="1" value="${esc(p.finish.days)}" data-ch="fdays">일</label><span class="sub small">${fmtMD(p.finish.s)}–${fmtMD(p.finish.e)} · 분량 목표 없이 체크리스트로 진행</span></div>`:''}</div>`;
 }
@@ -1267,7 +1261,7 @@ function restEditor(p){
  return `<p class="field"><span>휴식 요일</span></p><div class="row" style="margin-top:-8px">${DOWS.map((d,i)=>`<button class="pill ${p.restDows.includes(i)?'on':''}" data-act="dow" data-i="${i}" aria-pressed="${p.restDows.includes(i)}">${d}</button>`).join('')}</div>
  <p class="field" style="margin-top:22px"><span>추가 휴일</span></p>
  ${p.holidays.map((h,i)=>`<div class="plan"><div class="grow"><b>${fmtMD(h.s)}${h.e&&h.e!==h.s?' – '+fmtMD(h.e):''}</b>${h.label?`<span class="sub small">${esc(h.label)}</span>`:''}</div><button class="btn sm" data-act="delHol" data-i="${i}">삭제</button></div>`).join('')}
- <div class="row" style="margin-top:12px"><label class="lab">시작<input class="in" type="date" id="hs"></label><label class="lab">끝 (선택)<input class="in" type="date" id="he"></label><label class="lab grow">메모<input class="in" id="hl" placeholder="예: 여행"></label><button class="btn" data-act="addHol" style="align-self:flex-end">${I.plus}추가</button></div>`;
+ <div class="row holrow" style="margin-top:12px"><label class="lab">시작<input class="in" type="date" id="hs"></label><label class="lab">끝 (선택)<input class="in" type="date" id="he"></label><label class="lab grow">메모<input class="in" id="hl" placeholder="예: 여행"></label><button class="btn" data-act="addHol" style="align-self:flex-end">${I.plus}추가</button></div>`;
 }
 function schedEditor(p){
  const m=p.sched||'all';
@@ -1285,7 +1279,7 @@ function schedEditor(p){
 function previewHTML(p){
  const tot=p.subjects.filter(s=>s.mode==='total'),dl=p.subjects.filter(s=>s.mode!=='total');let h='';
  if(tot.length&&p.rounds.length){
-  h+=`<div class="scroll"><table class="tbl"><thead><tr><th>과목</th>${p.rounds.map((r,i)=>`<th>${i+1}회독${r.type==='wrong'?' (틀린 것만)':''}<small>${fmtMD(r.s)}–${fmtMD(r.e)} · ${studyDays(p,r.s,r.e)}일</small></th>`).join('')}</tr></thead><tbody>
+  h+=`<div class="scroll"><table class="tbl"><thead><tr><th>과목</th>${p.rounds.map((r,i)=>`<th>${i+1}회독<small>${fmtMD(r.s)}–${fmtMD(r.e)} · ${studyDays(p,r.s,r.e)}일</small></th>`).join('')}</tr></thead><tbody>
   ${tot.map(s=>`<tr><td><span class="dot" style="--c:${scol(s)};margin-right:8px"></span>${esc(s.name)}<small>총 ${fmt(s.total)} ${esc(p.unit)}</small></td>${p.rounds.map((r,i)=>{const a=roundAmt(p,s,i),d=subjDays(p,s,r.s,r.e,true);if(p.sched==='manual')return `<td class="r"><b>-</b><small>총 ${fmt(a)} · 직접 배치</small></td>`;return `<td class="r"><b>${d?fmt(Math.ceil(a/d)):'-'}</b><small>하루 · 총 ${fmt(a)}</small></td>`}).join('')}</tr>`).join('')}</tbody></table></div>`;
  }
  if(p.finish.on&&tot.length)h+=`<p class="help">마무리 기간 ${fmtMD(p.finish.s)}–${fmtMD(p.finish.e)}: 분량 목표 없이 체크리스트로 진행합니다.</p>`;
@@ -1313,8 +1307,8 @@ function setView(p){
  h+=sec('화면 모드',`<div class="row">${[['auto','자동'],['dark','다크'],['light','라이트']].map(([k,l])=>`<button class="pill ${tm===k?'on':''}" data-act="theme" data-k="${k}" aria-pressed="${tm===k}">${l}</button>`).join('')}</div><p class="help">자동은 기기 설정을 따라갑니다.</p>`);
  const ly=(S.opt.lay||'v')==='h'?'h':'v';
  h+=sec('과목 카드 배치',`<div class="row">${[['v','세로 스크롤'],['h','가로 스크롤']].map(([k,l])=>`<button class="pill ${ly===k?'on':''}" data-act="lay" data-k="${k}" aria-pressed="${ly===k}">${l}</button>`).join('')}</div><p class="help">세로 스크롤은 한 줄에 최대 3개씩(좁은 화면은 2개, 폰은 1개) 놓고 아래로 쌓습니다. 가로 스크롤은 한 줄로 놓고 옆으로 넘깁니다.</p>`);
- h+=sec('표시',`<div class="setgrid"><label class="tog"><input type="checkbox" data-ch="quote" ${S.opt.quote!==false?'checked':''}>오늘의 한 줄</label><label class="tog"><input type="checkbox" data-ch="tdc" ${p.todoCarry!==false?'checked':''}>못 끝낸 할 일 다음 날로 넘기기</label><label class="tog"><input type="checkbox" data-ch="oxa" ${p.oxa?'checked':''}>맞음·헷갈림·틀림 기록</label></div>`);
- h+=sec('백업',`<p class="sub small" style="margin-bottom:8px">아래 텍스트를 복사해 두면 다른 기기에서 불러올 수 있습니다. ${S.opt.lastBackup?`마지막 백업: ${ymd(new Date(S.opt.lastBackup))}`:'아직 백업한 적이 없습니다.'}</p><textarea class="in ta" id="exp" readonly>${esc(JSON.stringify(S))}</textarea><div class="row" style="margin:10px 0 22px"><button class="btn" data-act="copyExp">복사</button></div><textarea class="in ta" id="imp" placeholder="백업 텍스트를 붙여넣으세요"></textarea><div class="row" style="margin-top:10px"><button class="btn" data-act="doImp">불러오기</button></div>`);
+ h+=sec('표시',`<div class="setgrid"><label class="tog"><input type="checkbox" data-ch="quote" ${S.opt.quote!==false?'checked':''}>오늘의 한 줄</label><label class="tog"><input type="checkbox" data-ch="tdc" ${p.todoCarry!==false?'checked':''}>못 끝낸 할 일 다음 날로 넘기기</label></div>`);
+ h+=sec('백업',`<p class="sub small" style="margin-bottom:8px">아래 텍스트를 복사해 두면 다른 기기에서 불러올 수 있습니다. ${S.opt.lastBackup&&!isNaN(new Date(S.opt.lastBackup))?`마지막 백업: ${ymd(new Date(S.opt.lastBackup))}`:'아직 백업한 적이 없습니다.'}</p><textarea class="in ta" id="exp" readonly>${esc(JSON.stringify(S))}</textarea><div class="row" style="margin:10px 0 22px"><button class="btn" data-act="copyExp">복사</button></div><textarea class="in ta" id="imp" placeholder="백업 텍스트를 붙여넣으세요"></textarea><div class="row" style="margin-top:10px"><button class="btn" data-act="doImp">불러오기</button></div>`);
  h+=sec('초기화',`<p class="sub" style="margin-bottom:14px">모든 계획과 기록을 지웁니다.</p><button class="btn danger" data-act="reset">초기화</button>`);
  h+=`<p class="ver">Cadence · 버전 ${APP_VERSION}</p>`;
  return h;
@@ -1447,12 +1441,9 @@ function apply(el,commit){
   case 'sdow':if(s&&s.byDow)s.byDow[i]=int(v);break;
   case 'scarry':if(s)s.carry=v==='1';rr=true;break;
   case 'rs':case 're':if(p.rounds[i]&&validDate(v)){p.rounds[i][k==='rs'?'s':'e']=v;p.roundsAuto=false;rr=true}break;
-  case 'rpct':if(p.rounds[i])p.rounds[i].pct=Math.min(100,Math.max(1,parseInt(v)||100));rr=commit;break;
-  case 'rtype':if(p.rounds[i])p.rounds[i].type=v;rr=true;break;
   case 'rcount':p.roundsAuto=true;suggestRounds(p,+v);rr=true;break;
   case 'fon':p.finish.on=!!v;if(p.roundsAuto)suggestRounds(p,p.rounds.length||1);else syncFinish(p);rr=true;break;
   case 'fdays':p.finish.days=Math.max(1,parseInt(v)||1);if(commit){if(p.roundsAuto)suggestRounds(p,p.rounds.length||1);else syncFinish(p);rr=true}break;
-  case 'oxa':p.oxa=!!v;rr=true;break;
   case 'tdc':p.todoCarry=!!v;rr=true;break;
  }
  if(!V.wiz)save();
@@ -1474,7 +1465,6 @@ const ACT={
   const inp=$(`.tile[data-id="${s.id}"] .bigin`);if(inp){inp.focus();try{inp.select()}catch(e){}inp.addEventListener('blur',()=>{if(document.body.contains(inp)&&String(+inp.value||0)===String(d))render({keep:true})},{once:true})}},
  fill(el){const p=plan(),s=p&&p.subjects.find(x=>x.id===el.dataset.id);if(!s)return;const g=goal(p,s,todayStr());change(s.id,e=>{if(e.d<g)e.d=g})},
  add(el){if(Date.now()-NOCLICK<500)return;const n=+el.dataset.n;change(el.dataset.id,e=>{e.d+=n})},
- mark(el){const k=el.dataset.k;change(el.dataset.id,e=>{e[k]++;e.d++})},
  undo(){const u=V.undo,p=plan();if(!u||!p||u.pid!==p.id)return;p.log[u.ds]=p.log[u.ds]||{};if(u.prev)p.log[u.ds][u.sid]=u.prev;else delete p.log[u.ds][u.sid];cleanLog(p,u.ds);V.undo=null;save();render({keep:true})},
  finAdd(){const inp=$('#finIn'),p=plan();if(!inp||!inp.value.trim())return;p.finish.items.push({id:uid(),t:inp.value.trim(),done:false});save();render({keep:true})},
  finTog(el){const x=plan().finish.items.find(i=>i.id===el.dataset.id);if(x){x.done=!x.done;save();render({keep:true})}},
