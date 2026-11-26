@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -38,7 +38,7 @@ html.dark{
 html.dark{color-scheme:dark}
 html:not(.dark){color-scheme:light}
 *{box-sizing:border-box;min-width:0}
-html{-webkit-text-size-adjust:100%}
+html{-webkit-text-size-adjust:100%;touch-action:manipulation}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 var(--f);overflow-x:clip;-webkit-tap-highlight-color:transparent;-webkit-font-smoothing:antialiased}
 button,input,select,textarea{font:inherit;color:inherit}
 button{cursor:pointer}
@@ -99,7 +99,7 @@ select.in{padding-right:34px;background-image:linear-gradient(45deg,transparent 
 .in:focus{border-color:var(--blue2);box-shadow:0 0 0 3px var(--glow)}
 .in.n{width:92px;text-align:right;font-variant-numeric:tabular-nums}
 input[type=date].in{min-width:150px}
-.ta{width:100%;height:120px;padding:12px 14px;font-size:13px;font-family:ui-monospace,Menlo,monospace;resize:vertical}
+.ta{width:100%;height:120px;padding:12px 14px;font-size:16px;font-family:ui-monospace,Menlo,monospace;resize:vertical}
 .lab{display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--sub);font-weight:600}
 .lab.inl{flex-direction:row;align-items:center;gap:8px}
 .field{display:grid;gap:6px;margin-bottom:16px}
@@ -1562,6 +1562,9 @@ document.addEventListener('pointerdown',e=>{const b=e.target.closest('.stepb');i
 ['pointerup','pointercancel','lostpointercapture'].forEach(ev=>document.addEventListener(ev,()=>holdEnd(),true));
 window.addEventListener('blur',()=>holdEnd());
 document.addEventListener('visibilitychange',()=>{if(document.hidden)holdEnd()});
+/* 확대·축소 막기 (iOS Safari는 viewport 설정을 무시할 때가 있어 제스처도 막음) */
+['gesturestart','gesturechange','gestureend'].forEach(ev=>document.addEventListener(ev,e=>e.preventDefault(),{passive:false}));
+document.addEventListener('touchmove',e=>{if(e.scale!==undefined&&e.scale!==1)e.preventDefault()},{passive:false});
 /* 가로 스크롤: 마우스 휠·드래그 */
 document.addEventListener('wheel',e=>{const t=e.target.closest&&e.target.closest('.tiles:not(.vert)');if(!t||e.ctrlKey)return;if(Math.abs(e.deltaY)<=Math.abs(e.deltaX))return;const max=t.scrollWidth-t.clientWidth;if(max<=0)return;const nx=t.scrollLeft+e.deltaY;if((e.deltaY<0&&t.scrollLeft<=0)||(e.deltaY>0&&t.scrollLeft>=max-1))return;e.preventDefault();t.scrollLeft=Math.max(0,Math.min(max,nx))},{passive:false});
 let DR=null;
