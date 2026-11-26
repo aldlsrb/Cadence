@@ -53,11 +53,13 @@ svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.6;stroke
 .nb.on svg{color:var(--blue2);filter:drop-shadow(0 0 6px var(--glow))}
 .nb:focus-visible{outline:none;box-shadow:0 0 0 3px var(--glow)}
 @media (min-width:900px) and (orientation:landscape){
-  #nav{position:sticky;top:0;bottom:auto;right:auto;height:100vh;height:100dvh;width:104px;flex-direction:column;justify-content:center;gap:14px;padding:calc(env(safe-area-inset-top) + 24px) 12px 24px max(12px,env(safe-area-inset-left));border-top:0;border-right:1px solid var(--line)}
+  #nav{position:fixed;top:0;bottom:0;left:0;right:auto;height:auto;width:calc(104px + env(safe-area-inset-left));flex-direction:column;justify-content:center;gap:14px;padding:calc(env(safe-area-inset-top) + 24px) 12px 24px max(12px,env(safe-area-inset-left));border-top:0;border-right:1px solid var(--line)}
   .nb{flex:none;max-width:none;width:80px;min-height:72px;font-size:13px}
   .nb.on{background:var(--bg2);box-shadow:inset 0 0 0 1px var(--line)}
   #main{padding-bottom:48px}
+  #app{padding-left:calc(104px + env(safe-area-inset-left))}
 }
+html,body{overscroll-behavior:none}
 
 .view{animation:vin .32s cubic-bezier(.2,.8,.2,1)}
 @keyframes vin{from{opacity:0;transform:translateY(10px)}}
@@ -361,7 +363,7 @@ header>.cbrand+.eyebrow{padding-right:90px;overflow:hidden;text-overflow:ellipsi
 .col.full i{box-shadow:none}
 .dot{box-shadow:none}
 .day.today{box-shadow:inset 0 0 0 2px var(--blue2)}
-.opt.on{box-shadow:0 0 0 2px var(--blue)}
+.opts .opt.on{box-shadow:none;transform:none;border-color:var(--blue)}
 .swb{width:30px;height:30px;border-radius:50%;border:0;padding:0;background:var(--c);flex:none;margin-bottom:8px;cursor:pointer;box-shadow:inset 0 0 0 2px color-mix(in srgb,var(--ink) 12%,transparent)}
 .swb:focus-visible{outline:none;box-shadow:0 0 0 3px var(--glow)}
 .swg{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:10px}
@@ -840,7 +842,7 @@ const V={view:'today',sel:null,cal:null,wiz:null,wstep:0,werr:'',undo:null,ucust
 const tp=()=>V.wiz||plan();
 
 /* ---------- 렌더 ---------- */
-const APP_VERSION='1.0.0';
+const APP_VERSION='1.0.1';
 const APPICON='<svg viewBox="0 0 80 80" aria-hidden="true" style="stroke:none"><rect width="80" height="80" rx="18" fill="#fff"/><path d="M56.9 25.9A22 22 0 1 0 56.9 54.1" fill="none" stroke="#0070d1" stroke-width="9" stroke-linecap="round"/><circle cx="56.9" cy="54.1" r="5" fill="#0a0a0c" stroke="none"/></svg>';
 const NAV=[['today','오늘','today'],['prog','진도','prog'],['cal','캘린더','cal'],['set','설정','set']];
 function render(o={}){
@@ -1028,7 +1030,7 @@ function memosView(p){
 
 const HELP=[
  ['시작하기',[
-  ['계획 방식','<b>총 분량</b>: 총 분량과 마감일을 넣으면 하루 목표를 자동으로 계산합니다.<br><b>하루 목표</b>: 과목마다 하루에 할 양만 정합니다. 마감일은 선택입니다.<br><b>섞어서</b>: 과목마다 방식을 고릅니다. 예: 수학은 총 분량, 영단어는 하루 50개.'],
+  ['계획 방식','<b>총 분량</b>: 총 분량과 마감일을 넣으면 하루 목표를 자동으로 계산합니다.<br><b>하루 목표</b>: 과목마다 하루에 할 양만 정합니다. 마감일은 선택입니다.<br><b>자유 선택</b>: 과목마다 방식을 고릅니다. 예: 수학은 총 분량, 영단어는 하루 50개.'],
   ['분량 단위','문제·페이지·강의·단원 중에서 고르거나 직접 입력합니다. 진도 화면의 문구도 단위에 맞게 바뀝니다.'],
   ['여러 계획','설정 → 계획에서 새 계획을 만들고 전환할 수 있습니다. 계획마다 기록이 따로 저장됩니다.']]],
  ['앱처럼 사용하기',[
@@ -1327,7 +1329,7 @@ function wizView(){
  const steps=WS.map((_,i)=>`<i class="${i<=st?'on':''}"></i>`).join('');
  let b='';
  if(st===0){const o=(k,t,d)=>`<button class="opt ${p.kind===k?'on':''}" data-act="wkind" data-k="${k}"><b>${t}</b><span>${d}</span></button>`;
-  b=`<h1>어떤 방식으로 계획할까요</h1><p class="lead">나중에 과목별로 바꿀 수 있습니다.</p><div class="opts">${o('total','총 분량','총 분량과 마감일로 하루 목표를 자동 계산합니다.')}${o('daily','하루 목표','과목마다 하루 몇 개만 정합니다. 마감일은 선택입니다.')}${o('mixed','섞어서','과목마다 방식을 고릅니다. 예: 수학은 총 분량, 영단어는 하루 50개.')}</div>`}
+  b=`<h1>어떤 방식으로 계획할까요</h1><p class="lead">나중에 과목별로 바꿀 수 있습니다.</p><div class="opts">${o('total','총 분량','총 분량과 마감일로 하루 목표를 자동 계산합니다.')}${o('daily','하루 목표','과목마다 하루 몇 개만 정합니다. 마감일은 선택입니다.')}${o('mixed','자유 선택','과목마다 방식을 고릅니다. 예: 수학은 총 분량, 영단어는 하루 50개.')}</div>`}
  if(st===1)b=`<h1>목표와 기간</h1><p class="lead">시험이나 목표의 이름과 날짜를 정합니다.</p>
   <label class="field"><span>목표 이름</span><input class="in" placeholder="예: 토익 900, 기말고사" value="${esc(p.name)}" data-ch="name"></label>
   <div class="row"><label class="lab">시작일<input class="in" type="date" value="${esc(p.start)}" data-ch="start"></label><label class="lab">마감일${p.kind==='daily'?' (선택)':''}<input class="in" type="date" value="${esc(p.deadline)}" data-ch="deadline"></label></div>`;
